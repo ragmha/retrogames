@@ -3,11 +3,11 @@
 
 ## Getting Started 🚀
 
-* ```$ git clone https://github.com/ragmha/currency-folio```
+* ```$ git clone https://github.com/ragmha/retrogames```
 
 * ```$ yarn```
 
-* ```$ yarn dev ```
+* ```$ yarn start ```
 
 ## License
 [MIT](./license) © [Raghib Hasan](http://raghibm.com/)
