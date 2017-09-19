@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
 
-class About extends PureComponent {
-  render() {
-    return <div>About Component</div>;
-  }
-}
+const About = () => (
+  <div className="inner cover">
+    <h1 className="cover-heading">🎮 👾 RetroGames 🎮 👾 </h1>
+    <p className="lead">
+      🙌 This application is made with Node, React & Redux 🔥 🔥 🔥
+    </p>
+  </div>
+);
 
 export default About;
