@@ -1,40 +1,42 @@
-"use strict";
+'use strict';
 
 const webpack = require('webpack');
 const PATHS = require('./webpack-paths');
+const Dotenv = require('dotenv-webpack');
 
 exports.devServer = function(options) {
-	return {
-		devServer:{
-			historyApiFallback: true,
-			hot: true,
-			inline: true,
-			stats: 'errors-only',
-			host: options.host,
-			port: options.port,
-			contentBase: './client/dist',
-		},
-		plugins: [
-			new webpack.HotModuleReplacementPlugin({
-				multistep: true
-			})
-		]
-	};
-}
+  return {
+    devServer: {
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      stats: 'errors-only',
+      host: options.host,
+      port: options.port,
+      contentBase: './client/dist',
+    },
+    plugins: [
+      new Dotenv(),
+      new webpack.HotModuleReplacementPlugin({
+        multistep: true,
+      }),
+    ],
+  };
+};
 
 exports.css = {
   test: /\.css$/,
   use: ['style-loader', 'css-loader'],
-  include: PATHS.css
-}
+  include: PATHS.css,
+};
 
 exports.font = {
   test: /\.ttf$/,
-  use: ['file-loader']
-}
+  use: ['file-loader'],
+};
 
 exports.babel = {
   test: /\.jsx?$/,
   exclude: /node_modules/,
-  loaders: ['babel-loader']
+  loaders: ['babel-loader'],
 };
