@@ -1,9 +1,8 @@
 {
-  "presets": [
-    "es2015",
-    "react"
-  ],
+  "presets": ["env", "react"],
   "plugins": [
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    "transform-class-properties",
+    "transform-async-to-generator"
   ]
 }
