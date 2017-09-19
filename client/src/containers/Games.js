@@ -19,19 +19,19 @@ class Games extends Component {
     $('#game-modal').modal();
   };
 
-  async getGames() {
+  getGames = async () => {
     const games = await getGames();
     this.setState({ games });
-  }
+  };
 
-  async deleteGame(id) {
+  deleteGame = async id => {
     const games = await deleteGame(id);
     const gameID = this.state.games.filter(game => game._id !== id);
     this.setState({
       games: gameID,
     });
     console.log('Deleted Game!');
-  }
+  };
 
   setSearchBar = event => {
     let term = event.target.value.toLowerCase();

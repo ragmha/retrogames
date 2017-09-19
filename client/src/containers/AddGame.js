@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 import { Form } from '../components';
-import { submitGame, uploadPicture as FileUpload } from '../api';
+import { submitGame, uploadPicture } from '../api';
 
 class AddGame extends Component {
   state = {
@@ -13,7 +13,11 @@ class AddGame extends Component {
   };
 
   submit = async () => {
-    await submitGame(this.state.games);
+    const newGame = {
+      ...this.state.games,
+      picture: $('#picture').attr('src'),
+    };
+    await submitGame(newGame);
     await hashHistory.push('/games');
   };
 
@@ -21,7 +25,7 @@ class AddGame extends Component {
     return (
       <Form
         submit={this.submit}
-        uploadPicture={FileUpload}
+        uploadPicture={uploadPicture}
         setGame={this.setGame}
       />
     );

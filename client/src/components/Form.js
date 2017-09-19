@@ -68,7 +68,7 @@ class Form extends Component {
                       type="button"
                       className="btn btn-danger"
                       ref={input => (this.picture = input)}
-                      onClick={() => this.props.uploadPicture}
+                      onClick={() => this.props.uploadPicture()}
                     >
                       Upload <span className="caret" />
                     </button>

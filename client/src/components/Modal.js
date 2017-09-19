@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ _id, img, name, description, year, picture }) => (
+const Modal = ({ game }) => (
   <div
     className="modal fade"
     id="game-modal"
@@ -22,14 +22,14 @@ const Modal = ({ _id, img, name, description, year, picture }) => (
           <h4
             className="modal-title"
             id="myModalLabel"
-          >{`${name} (${year})`}</h4>
+          >{`${game.name} (${game.year})`}</h4>
         </div>
         <div className="modal-body">
           <div>
-            <img src={picture} className="img-responsive img-big" />
+            <img src={game.picture} className="img-responsive img-big" />
           </div>
           <hr />
-          <p>{description}</p>
+          <p>{game.description}</p>
         </div>
         <div className="modal-footer">
           <button
