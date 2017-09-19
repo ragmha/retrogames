@@ -1,9 +1,19 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import { Link } from 'react-router';
 
-class Welcome extends PureComponent {
-  render() {
-    return <div>Welcome Component</div>;
-  }
-}
+const Welcome = () => (
+  <div className="inner cover">
+    <h1 className="cover-heading">Welcome</h1>
+    <p className="lead">
+      Click on browse to start your journey into the wiki of games that made
+      history.
+    </p>
+    <p className="lead">
+      <Link className="btn btn-lg" to="/games">
+        Browse!
+      </Link>
+    </p>
+  </div>
+);
 
 export default Welcome;
