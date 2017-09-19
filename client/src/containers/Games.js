@@ -42,15 +42,14 @@ class Games extends Component {
     const { games, selectedGame, searchBar } = this.state;
     return (
       <div>
-        <Modal game={selectedGame}>
-          <GameListManager
-            games={games}
-            searchBar={searchBar}
-            setSearchBar={this.setSearchBar}
-            toggleModal={this.toggleModal}
-            deleteGame={this.deleteGame}
-          />
-        </Modal>
+        <Modal game={selectedGame} />
+        <GameListManager
+          games={games}
+          searchBar={searchBar}
+          setSearchBar={this.setSearchBar}
+          toggleModal={this.toggleModal}
+          deleteGame={this.deleteGame}
+        />
       </div>
     );
   }
