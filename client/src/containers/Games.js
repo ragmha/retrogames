@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import { Modal, GameListManager } from '../components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Immutable from 'immutable';
+
 import { getGames, deleteGame } from '../api';
+
+import { Modal, GameListManager } from '../components';
+import * as gameActionsCreators from '../actions/games';
 
 class Games extends Component {
   state = {
@@ -19,10 +25,9 @@ class Games extends Component {
     $('#game-modal').modal();
   };
 
-  getGames = async () => {
-    const games = await getGames();
-    this.setState({ games });
-  };
+  getGames() {
+    this.props.gamesActions.getGames();
+  }
 
   deleteGame = async id => {
     const games = await deleteGame(id);
@@ -39,7 +44,8 @@ class Games extends Component {
   };
 
   render() {
-    const { games, selectedGame, searchBar } = this.state;
+    const { selectedGame, searchBar } = this.state;
+    const { games } = this.props;
     return (
       <div>
         <Modal game={selectedGame} />
@@ -55,4 +61,12 @@ class Games extends Component {
   }
 }
 
-export default Games;
+const mapStateToProps = state => ({
+  games: state.getIn(['games', 'list'], Immutable.List()).toJS(),
+});
+
+const mapDispatchToProps = dispatch => ({
+  gamesActions: bindActionCreators(gameActionsCreators, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Games);

@@ -1,5 +1,6 @@
+import { all, fork } from 'redux-saga/effects';
 import { watchGetGames } from './games.js';
 
 export default function* rootSaga() {
-  yield [watchGetGames()]; // starting all the sagas in parallel
+  yield all([fork(watchGetGames)]); // starting all the sagas in parallel
 }

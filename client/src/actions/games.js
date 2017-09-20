@@ -8,6 +8,6 @@ const getGames = () => ({ type: GET_GAMES });
 
 const getGamesSuccess = games => ({ type: GET_GAMES_SUCCESS, games });
 
-const getGamesFailure = () => ({ type: GET_GAMES_FAILURE });
+const getGamesFailure = error => ({ type: GET_GAMES_FAILURE, error });
 
 export { getGames, getGamesSuccess, getGamesFailure };

@@ -42,11 +42,10 @@ export const uploadPicture = () => {
       openTo: 'COMPUTER', // First choice to upload files from
     },
     function(Blob) {
-      console.log(JSON.stringify(Blob));
       $('#picture').attr('src', Blob.url);
     },
-    function(FPError) {
-      console.log(FPError.toString());
+    function(error) {
+      console.error(error.toString());
     }
   );
 };

@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 
-import { GET_GAMES_SUCCESS, GET_GAMES_FAILURE } from '../constants/games.js';
+import { GET_GAMES_SUCCESS, GET_GAMES_FAILURE } from '../constants/games';
 
 const initialState = Immutable.Map();
 

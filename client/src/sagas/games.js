@@ -1,9 +1,7 @@
-import { takeLatest } from 'redux-saga'; // Saga Helper
-import { put, call } from 'redux-saga/effects'; // Useful to interact with Saga Middleware
+import { takeLatest, put, call } from 'redux-saga/effects'; // Useful to interact with Saga Middleware
 
 import { GET_GAMES } from '../constants/games'; // Saga takes care of GET_GAMES action ⚡️
 import { getGamesSuccess, getGamesFailure } from '../actions/games'; // Either one is yielded when fetch is done!
-
 import { getGames as fetchGames } from '../api';
 
 function* getGames() {
@@ -11,7 +9,7 @@ function* getGames() {
     const games = yield call(fetchGames);
     yield put(getGamesSuccess(games));
   } catch (error) {
-    yield put(getGamesFailure);
+    yield put(getGamesFailure(error));
   }
 }
 
