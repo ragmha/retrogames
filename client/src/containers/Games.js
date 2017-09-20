@@ -40,12 +40,13 @@ class Games extends Component {
 
   setSearchBar = event => {
     let term = event.target.value.toLowerCase();
-    this.setState({ searchBar: term });
+    this.props.gamesActions.setSearchBar(term);
   };
 
   render() {
-    const { selectedGame, searchBar } = this.state;
-    const { games } = this.props;
+    const { selectedGame } = this.state;
+    const { games, searchBar } = this.props;
+
     return (
       <div>
         <Modal game={selectedGame} />
@@ -63,6 +64,7 @@ class Games extends Component {
 
 const mapStateToProps = state => ({
   games: state.getIn(['games', 'list'], Immutable.List()).toJS(),
+  searchBar: state.getIn(['games', 'searchBar'], ''),
 });
 
 const mapDispatchToProps = dispatch => ({

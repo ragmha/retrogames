@@ -1,6 +1,10 @@
 import Immutable from 'immutable';
 
-import { GET_GAMES_SUCCESS, GET_GAMES_FAILURE } from '../constants/games';
+import {
+  GET_GAMES_SUCCESS,
+  GET_GAMES_FAILURE,
+  SET_SEARCH_BAR,
+} from '../constants/games';
 
 const initialState = Immutable.Map();
 
@@ -10,6 +14,11 @@ export default (state = initialState, action) => {
       // returns a new state with fetched games in state
       return state.merge({
         list: action.games,
+      });
+    }
+    case SET_SEARCH_BAR: {
+      return state.merge({
+        searchBar: action.keyword,
       });
     }
     case GET_GAMES_FAILURE: {
