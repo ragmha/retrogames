@@ -3,6 +3,7 @@ import {
   GET_GAMES_SUCCESS,
   GET_GAMES_FAILURE,
   SET_SEARCH_BAR,
+  SHOW_SELECTED_GAME,
 } from '../constants/games.js';
 
 const getGames = () => ({ type: GET_GAMES });
@@ -13,4 +14,12 @@ const getGamesFailure = error => ({ type: GET_GAMES_FAILURE, error });
 
 const setSearchBar = keyword => ({ type: SET_SEARCH_BAR, keyword });
 
-export { getGames, getGamesSuccess, getGamesFailure, setSearchBar };
+const showSelectedGame = game => ({ type: SHOW_SELECTED_GAME, game });
+
+export {
+  getGames,
+  getGamesSuccess,
+  getGamesFailure,
+  setSearchBar,
+  showSelectedGame,
+};

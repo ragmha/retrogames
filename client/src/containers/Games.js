@@ -20,8 +20,8 @@ class Games extends Component {
   }
 
   toggleModal = index => {
-    let gameID = this.state.games[index];
-    this.setState({ selectedGame: gameID });
+    let gameID = this.props.games[index];
+    this.props.gamesActions.showSelectedGame(gameID);
     $('#game-modal').modal();
   };
 
@@ -44,9 +44,7 @@ class Games extends Component {
   };
 
   render() {
-    const { selectedGame } = this.state;
-    const { games, searchBar } = this.props;
-
+    const { games, selectedGame, searchBar } = this.props;
     return (
       <div>
         <Modal game={selectedGame} />
@@ -65,6 +63,7 @@ class Games extends Component {
 const mapStateToProps = state => ({
   games: state.getIn(['games', 'list'], Immutable.List()).toJS(),
   searchBar: state.getIn(['games', 'searchBar'], ''),
+  selectedGame: state.getIn(['games', 'selectedGame'], Immutable.List()).toJS(),
 });
 
 const mapDispatchToProps = dispatch => ({
