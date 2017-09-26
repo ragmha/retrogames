@@ -1,8 +1,14 @@
-import { takeLatest, put, call } from 'redux-saga/effects'; // Useful to interact with Saga Middleware
+import { takeLatest, put, call, select } from 'redux-saga/effects';
+import { GET_GAMES, DELETE_GAME } from '../constants/games';
 
-import { GET_GAMES } from '../constants/games'; // Saga takes care of GET_GAMES action ⚡️
-import { getGamesSuccess, getGamesFailure } from '../actions/games'; // Either one is yielded when fetch is done!
-import { getGames as fetchGames } from '../api';
+import {
+  getGamesSuccess,
+  getGamesFailure,
+  deleteGameSuccess,
+  deleteGameFailure,
+} from '../actions/games'; // Either one is yielded when fetch is done!
+
+import { getGames as fetchGames, deleteGame as deleteServerGame } from '../api';
 
 function* getGames() {
   try {
@@ -18,5 +24,23 @@ function* watchGetGames() {
   yield takeLatest(GET_GAMES, getGames);
 }
 
+// Selector Function to return the games list from the state
+const selectedGames = state => state.getIn(['games', 'list']).toJS();
+
+function* deleteGame(action) {
+  const { id } = action;
+  const games = yield select(selectedGames); // Taking games from the state
+  try {
+    yield call(deleteServerGame, id);
+    yield put(deleteGameSuccess(games.filter(game => game._id !== id)));
+  } catch (error) {
+    yield put(deleteGameFailure(error));
+  }
+}
+
+function* watchDeleteGame() {
+  yield takeLatest(DELETE_GAME, deleteGame);
+}
+
 // The watcher will run parallel
-export { watchGetGames };
+export { watchGetGames, watchDeleteGame };

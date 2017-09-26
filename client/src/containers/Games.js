@@ -29,12 +29,8 @@ class Games extends Component {
     this.props.gamesActions.getGames();
   }
 
-  deleteGame = async id => {
-    const games = await deleteGame(id);
-    const gameID = this.state.games.filter(game => game._id !== id);
-    this.setState({
-      games: gameID,
-    });
+  deleteGame = id => {
+    this.props.gamesActions.deleteGame(id);
     console.log('Deleted Game!');
   };
 
