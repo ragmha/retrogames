@@ -1,35 +1,46 @@
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 import { Form } from '../components';
-import { submitGame, uploadPicture } from '../api';
+
+import * as gamesActionCreators from '../actions/games';
+import * as filestackActionCreators from '../actions/filestack';
 
 class AddGame extends Component {
   state = {
     games: {},
   };
 
-  setGame = games => {
-    this.setState({ games });
+  submit = event => {
+    event.preventDefault();
+    this.props.gamesActions.postGame();
+    hashHistory.push('/games');
   };
 
-  submit = async () => {
-    const newGame = {
-      ...this.state.games,
-      picture: $('#picture').attr('src'),
-    };
-    await submitGame(newGame);
-    await hashHistory.push('/games');
+  uploadPicture = () => {
+    this.props.filestackActions.uploadPicture();
   };
 
   render() {
     return (
       <Form
+        picture={picture}
         submit={this.submit}
-        uploadPicture={uploadPicture}
-        setGame={this.setGame}
+        uploadPicture={this.uploadPicture}
       />
     );
   }
 }
 
-export default AddGame;
+function mapStateToProps(state) {
+  return {
+    picture: state.getIn(['filestack', 'url'], ''),
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    gamesActions: bindActionCreators(gamesActionCreators, dispatch),
+    filestackActions: bindActionCreators(filestackActionCreators, dispatch),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AddGame);

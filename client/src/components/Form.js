@@ -1,24 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router';
+import { Field, reduxForm } from 'redux-form/immutable';
 
-class Form extends Component {
-  setGame() {
-    const game = {
-      name: this.name.value,
-      description: this.description.value,
-      year: this.year.value,
-      picture: this.picture.value,
-    };
-    this.props.setGame(game);
-  }
-
-  handleSubmit = async event => {
-    event.preventDefault();
-    await this.setGame();
-    await this.props.submit();
-  };
-
+class Form extends PureComponent {
   render() {
+    const { picture, uploadPicture } = this.props;
     return (
       <div className="row scrollable">
         <div className="col-md-offset-2 col-md-8">
@@ -32,50 +18,57 @@ class Form extends Component {
               <h2 className="panel-title text-center">Add a Game!</h2>
             </div>
             <div className="panel-body">
-              <form name="product-form" onSubmit={this.handleSubmit}>
+              <form name="product-form" onSubmit={this.props.submit}>
                 <div className="form-group text-left">
-                  <label htmlFor="caption">Name</label>
-                  <input
-                    className="form-control"
+                  <label htmlFor="name">Name</label>
+                  <Field
+                    name="name"
                     type="text"
-                    placeholder="Enter the title"
-                    ref={input => (this.name = input)}
+                    className="form-control"
+                    component="input"
+                    placeholder="Enter the name"
                   />
                 </div>
                 <div className="form-group text-left">
                   <label htmlFor="description">Description</label>
-                  <textarea
-                    type="text"
+                  <Field
+                    name="description"
+                    component="textarea"
                     className="form-control"
                     placeholder="Enter the description"
                     rows="5"
-                    ref={input => (this.description = input)}
                   />
                 </div>
                 <div className="form-group text-left">
                   <label htmlFor="price">Year</label>
-                  <input
+                  <Field
+                    name="year"
+                    component="input"
                     type="number"
                     className="form-control"
                     placeholder="Enter the year"
-                    ref={input => (this.year = input)}
                   />
                 </div>
                 <div className="form-group text-left">
                   <label htmlFor="picture">Picture</label>
                   <div className="text-center dropup">
                     <button
+                      id="button-upload"
                       type="button"
                       className="btn btn-danger"
-                      ref={input => (this.picture = input)}
-                      onClick={() => this.props.uploadPicture()}
+                      onClick={() => uploadPicture()}
                     >
                       Upload <span className="caret" />
                     </button>
                   </div>
                 </div>
                 <div className="form-group text-center">
-                  <img id="picture" className="img-responsive img-upload" />
+                  <img
+                    id="picture"
+                    className="img-responsive img-upload"
+                    src={picture}
+                    alt={picture}
+                  />
                 </div>
                 <button type="submit" className="btn btn-submit btn-block">
                   Submit
@@ -88,4 +81,4 @@ class Form extends Component {
     );
   }
 }
-export default Form;
+export default reduxForm({ form: 'game' })(Form); // can be accessed from the state as form.game

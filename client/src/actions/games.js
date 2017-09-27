@@ -7,6 +7,9 @@ import {
   DELETE_GAME,
   DELETE_GAME_SUCCESS,
   DELETE_GAME_FAILURE,
+  POST_GAME,
+  POST_GAME_SUCCESS,
+  POST_GAME_FAILURE,
 } from '../constants/games.js';
 
 const getGames = () => ({ type: GET_GAMES });
@@ -20,6 +23,10 @@ const deleteGame = id => ({ type: DELETE_GAME, id });
 const deleteGameSuccess = games => ({ type: DELETE_GAME_SUCCESS, games });
 const deleteGameFailure = error => ({ type: DELETE_GAME_FAILURE, error });
 
+const postGame = () => ({ type: POST_GAME });
+const postGameSuccess = () => ({ type: POST_GAME_SUCCESS });
+const postGameFailure = error => ({ type: POST_GAME_FAILURE, error });
+
 export {
   getGames,
   getGamesSuccess,
@@ -29,4 +36,7 @@ export {
   deleteGame,
   deleteGameSuccess,
   deleteGameFailure,
+  postGame,
+  postGameSuccess,
+  postGameFailure,
 };

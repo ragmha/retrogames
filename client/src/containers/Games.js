@@ -8,6 +8,7 @@ import { getGames, deleteGame } from '../api';
 import { Modal, GameListManager } from '../components';
 import * as gameActionsCreators from '../actions/games';
 
+
 class Games extends Component {
   state = {
     games: [],
