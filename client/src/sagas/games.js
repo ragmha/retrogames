@@ -63,7 +63,7 @@ function* postGame() {
   const newGame = Object.assign({}, { picture }, game.values);
   try {
     yield call(postServerGame, newGame);
-    yield put(postGameSuccess);
+    yield put(postGameSuccess());
   } catch (error) {
     yield put(postGameFailure(error));
   }

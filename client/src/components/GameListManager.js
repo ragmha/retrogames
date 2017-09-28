@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import Game from './Game';
 
@@ -39,5 +40,13 @@ const GameListManager = ({
     <hr />
   </div>
 );
+
+GameListManager.propTypes = {
+  games: PropTypes.array,
+  searchBar: PropTypes.string,
+  setSearchBar: PropTypes.func,
+  toggleModal: PropTypes.func,
+  deleteGame: PropTypes.func,
+};
 
 export default GameListManager;

@@ -18,7 +18,7 @@ class Form extends PureComponent {
               <h2 className="panel-title text-center">Add a Game!</h2>
             </div>
             <div className="panel-body">
-              <form name="product-form" onSubmit={this.props.submit}>
+              <form name="product-form" onSubmit={this.props.handleSubmit}>
                 <div className="form-group text-left">
                   <label htmlFor="name">Name</label>
                   <Field

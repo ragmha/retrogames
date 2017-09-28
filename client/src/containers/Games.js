@@ -1,28 +1,18 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Immutable from 'immutable';
 
-import { getGames, deleteGame } from '../api';
+import { Modal, GameListManager } from '../components/';
+import * as gamesActionCreators from '../actions/games';
 
-import { Modal, GameListManager } from '../components';
-import * as gameActionsCreators from '../actions/games';
-
-
-class Games extends Component {
-  state = {
-    games: [],
-    selectedGame: {},
-    searchBar: '',
-  };
-
+class Games extends PureComponent {
   componentDidMount() {
     this.getGames();
   }
 
   toggleModal = index => {
-    let gameID = this.props.games[index];
-    this.props.gamesActions.showSelectedGame(gameID);
+    this.props.gamesActions.showSelectedGame(this.props.games[index]);
     $('#game-modal').modal();
   };
 
@@ -32,12 +22,10 @@ class Games extends Component {
 
   deleteGame = id => {
     this.props.gamesActions.deleteGame(id);
-    console.log('Deleted Game!');
   };
 
   setSearchBar = event => {
-    let term = event.target.value.toLowerCase();
-    this.props.gamesActions.setSearchBar(term);
+    this.props.gamesActions.setSearchBar(event.target.value.toLowerCase());
   };
 
   render() {
@@ -64,7 +52,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  gamesActions: bindActionCreators(gameActionsCreators, dispatch),
+  gamesActions: bindActionCreators(gamesActionCreators, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Games);
